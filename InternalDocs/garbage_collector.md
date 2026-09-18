@@ -295,12 +295,6 @@ process is really a breadth first search over the object graph. Once all the obj
 are scanned, the GC knows that all container objects in the tentatively unreachable
 list are really unreachable and can thus be garbage collected.
 
-Pragmatically, it's important to note that no recursion is required by any of this,
-and neither does it in any other way require additional memory proportional to the
-number of objects, number of pointers, or the lengths of pointer chains.  Apart from
-`O(1)` storage for internal C needs, the objects themselves contain all the storage
-the GC algorithms require.
-
 Why moving unreachable objects is better
 ----------------------------------------
 
