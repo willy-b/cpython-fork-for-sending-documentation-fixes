@@ -527,8 +527,8 @@ into the cache.  This is the mechanism that provides the window.
 
 When performing the transitive closure of "alive" status, the set of objects
 yet to visit are stored in one of two places.  First, they can be stored in the
-prefetch buffer. Second, there is a LIFO stack, of unlimited size.  When object
-references are found using `tp_traverse`, they are enqueued in the buffer if
+prefetch buffer. Second, there is a LIFO stack, limited only by available memory.
+When object references are found using `tp_traverse`, they are enqueued in the buffer if
 it is not full, otherwise they are pushed to the stack.
 
 We must take special care not to access the memory referred to by an object
