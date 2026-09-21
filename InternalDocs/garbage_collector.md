@@ -282,9 +282,8 @@ state in the previous image and after examining the objects referred to by `link
 the GC knows that `link_3` is reachable after all, so it is moved back to the
 original list and its `gc_ref` field is set to 1 so that if the GC visits it again,
 it will know that it's reachable. To avoid visiting an object twice, the GC marks all
-objects that have already been visited once (by unsetting the `PREV_MASK_COLLECTING`
-flag) so that if an object that has already been processed is referenced by some other
-object, the GC does not process it twice.
+objects that have already been visited once (by unsetting a flag, e.g. in the non-free-threaded build, the `PREV_MASK_COLLECTING` flag) so that if an object that has already been processed 
+is referenced by some other object, the GC does not process it twice.
 
 ![gc-image5](images/python-cyclic-gc-5-new-page.png)
 
@@ -625,7 +624,7 @@ range of 20% to 40% faster for the entire full GC collection.
 Optimization: reusing fields to save memory
 ===========================================
 
-In order to save memory, the two linked list pointers in every object with GC
+In order to save memory, in the non-free-threaded build the two linked list pointers in every object with GC
 support are reused for several purposes. This is a common optimization known
 as "fat pointers" or "tagged pointers": pointers that carry additional data,
 "folded" into the pointer, meaning stored inline in the data representing the
